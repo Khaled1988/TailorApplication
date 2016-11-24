@@ -1,0 +1,494 @@
+USE [TailorDB]
+GO
+
+/****** Object:  Table [dbo].[Customer]    Script Date: 01/04/2016 15:50:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Customer](
+	[CustomerID] [int] IDENTITY(1,1) NOT NULL,
+	[CustomerIDNo] [nvarchar](50) NULL,
+	[Name] [nvarchar](100) NULL,
+	[Department] [nvarchar](50) NULL,
+	[MobileNo] [nvarchar](11) NULL,
+	[Gender] [nvarchar](50) NULL,
+	[Address] [nvarchar](max) NULL,
+	[CustomerType] [nvarchar](50) NULL,
+	[Designation] [nvarchar](90) NULL,
+	[WorkStation] [nvarchar](200) NULL,
+ CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
+(
+	[CustomerID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+
+
+
+
+------------------------------------------------------------
+
+USE [TailorDB]
+GO
+
+/****** Object:  Table [dbo].[DressType]    Script Date: 01/04/2016 15:51:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[DressType](
+	[DressTypeID] [int] IDENTITY(1,1) NOT NULL,
+	[TypeName] [nvarchar](100) NOT NULL,
+	[Price] [float] NULL,
+ CONSTRAINT [PK_DressType] PRIMARY KEY CLUSTERED 
+(
+	[DressTypeID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+
+
+
+-----------------------------------------------------------------
+
+USE [TailorDB]
+GO
+
+/****** Object:  Table [dbo].[Material]    Script Date: 01/04/2016 15:51:37 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Material](
+	[MaterialID] [int] IDENTITY(1,1) NOT NULL,
+	[MaterialName] [varchar](150) NOT NULL,
+	[MaterialPrice] [float] NULL,
+	[MaterialQuantity] [float] NULL,
+	[MaterialCode] [varchar](250) NULL,
+	[MaterialOtherInfo] [ntext] NULL,
+	[SupplierID] [int] NOT NULL,
+	[Unit] [varchar](50) NULL,
+	[PurchaseDate] [datetime] NULL,
+ CONSTRAINT [PK_Material] PRIMARY KEY CLUSTERED 
+(
+	[MaterialID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+-------------------------------------------------------------
+USE [TailorDB]
+GO
+
+/****** Object:  Table [dbo].[Measurement]    Script Date: 01/04/2016 15:52:12 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Measurement](
+	[MeasurementID] [int] IDENTITY(1,1) NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[DressTypeID] [int] NOT NULL,
+	[Length] [float] NULL,
+	[Chest] [float] NULL,
+	[WaistBelly] [float] NULL,
+	[Hip] [float] NULL,
+	[Shoulder] [float] NULL,
+	[SleeveLength] [float] NULL,
+	[CuffOpening] [float] NULL,
+	[Neck] [float] NULL,
+	[AllRoundRise] [float] NULL,
+	[Thaigh] [float] NULL,
+	[BottomOpening] [float] NULL,
+ CONSTRAINT [PK_Measurement] PRIMARY KEY CLUSTERED 
+(
+	[MeasurementID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+-------------------------------------------------------------------
+USE [TailorDB]
+GO
+
+/****** Object:  Table [dbo].[OrderDetail]    Script Date: 01/04/2016 15:52:31 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[OrderDetail](
+	[OrderDetailsID] [int] IDENTITY(1,1) NOT NULL,
+	[OrderID] [int] NULL,
+	[DressTypeID] [int] NULL,
+	[Quantity] [int] NULL,
+	[PriceID] [int] NULL,
+ CONSTRAINT [PK_OrderDetail] PRIMARY KEY CLUSTERED 
+(
+	[OrderDetailsID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+
+
+
+-------------------------------------------------------------
+USE [TailorDB]
+GO
+
+/****** Object:  Table [dbo].[OrderInfo]    Script Date: 01/04/2016 15:52:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[OrderInfo](
+	[OrderID] [int] IDENTITY(1,1) NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[OrderNo] [nvarchar](50) NULL,
+	[OrderDate] [datetime] NULL,
+	[DeliveryDate] [datetime] NULL,
+	[Quantity] [int] NULL,
+	[Price] [float] NULL,
+	[PaidAmount] [float] NULL,
+	[Discount] [float] NULL,
+	[PaymentStatus] [int] NULL,
+	[DeliveryStatus] [int] NULL,
+	[DueAmount] [float] NULL,
+	[CancilStatus] [int] NULL,
+	[Remarks] [nvarchar](max) NULL,
+ CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+
+
+-----------------------------------------------------------------
+
+
+USE [TailorDB]
+GO
+
+/****** Object:  Table [dbo].[OrderMaterial]    Script Date: 01/04/2016 15:53:20 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[OrderMaterial](
+	[OrderMaterialID] [int] IDENTITY(1,1) NOT NULL,
+	[OrderID] [int] NOT NULL,
+	[MaterialCode] [varchar](50) NULL,
+	[MaterialQuantity] [float] NULL,
+	[Date] [datetime] NULL,
+	[OrderNo] [nvarchar](200) NULL,
+ CONSTRAINT [PK_OrderMaterial] PRIMARY KEY CLUSTERED 
+(
+	[OrderMaterialID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+--------------------------------------------------------------
+
+USE [TailorDB]
+GO
+
+/****** Object:  Table [dbo].[Supplier]    Script Date: 01/04/2016 15:54:54 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Supplier](
+	[SupplierID] [int] IDENTITY(1,1) NOT NULL,
+	[SupplierCode] [varchar](50) NOT NULL,
+	[SupplierName] [varchar](150) NULL,
+	[SupplierAddress] [varchar](250) NULL,
+	[SupplierMobile] [varchar](50) NULL,
+ CONSTRAINT [PK_Supplier] PRIMARY KEY CLUSTERED 
+(
+	[SupplierID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+-----------------------------------------------------------------
+
+USE [TailorDB]
+GO
+
+/****** Object:  Table [dbo].[UserInfo]    Script Date: 01/04/2016 15:55:16 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[UserInfo](
+	[UserID] [int] IDENTITY(1,1) NOT NULL,
+	[LoginID] [nvarchar](50) NOT NULL,
+	[Password] [nvarchar](50) NOT NULL,
+	[FullName] [nvarchar](100) NULL,
+	[MobileNo] [nvarchar](11) NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[UserID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+
+----------------------------------------------------------------
+
+------------------------------------------------------
+IIS APPPOOL\DefaultAppPool
+-------------------------------------------------------------------
+USE [TailorDB]
+GO
+/****** Object:  StoredProcedure [dbo].[GetAllMaterialStatus]    Script Date: 01/04/2016 15:56:11 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[GetAllMaterialStatus]
+As
+Begin
+--Select OrderMaterial.MaterialCode,
+--Material.MaterialName, 
+--SUM(Material.MaterialQuantity) MaterialQuantityIn,
+--SUM(OrderMaterial.MaterialQuantity) MaterialQuantityOut,
+--Material.Unit,
+--( SUM(Material.MaterialQuantity)-SUM(OrderMaterial.MaterialQuantity)) StatusNow
+--from OrderMaterial
+--inner join Material on OrderMaterial.MaterialCode= Material.MaterialCode
+--group by OrderMaterial.MaterialCode,Material.MaterialName,Material.Unit;
+select Material.MaterialCode,Material.MaterialName,Material.MaterialQuantity InQty,Material.Unit,Material.PurchaseDate
+from Material
+left join OrderMaterial on OrderMaterial.MaterialCode=Material.MaterialCode;
+end
+
+-------------------------------------------------------------
+
+USE [TailorDB]
+GO
+/****** Object:  StoredProcedure [dbo].[GetAllUndeliveredOrder]    Script Date: 01/04/2016 15:56:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[GetAllUndeliveredOrder]
+(@From datetime,
+@To datetime)
+as
+select OrderInfo.OrderID,OrderInfo.OrderNo,OrderInfo.OrderDate,OrderInfo.DeliveryDate,Customer.Name,DressType.TypeName,DressType.Price,OrderDetail.Quantity,OrderInfo.Price TotalPrice,OrderInfo.Discount,OrderInfo.PaidAmount,OrderInfo.DueAmount
+from OrderInfo
+join Customer on Customer.customerid = OrderInfo.customerid
+join OrderDetail on OrderDetail.orderid=OrderInfo.OrderID
+join DressType on DressType.dresstypeid=orderdetail.dresstypeid
+where OrderInfo.DeliveryStatus = 1
+and OrderInfo.OrderDate between @From and @To;
+
+------------------------------------------------------------------------
+
+USE [TailorDB]
+GO
+/****** Object:  StoredProcedure [dbo].[GetCustomerMeasurement]    Script Date: 01/04/2016 15:57:31 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[GetCustomerMeasurement]
+@MeasurementID Int
+as
+begin
+
+select Measurement.*,Customer.Name CustomerName,Customer.CustomerIDNo,Customer.MobileNo,DressType.TypeName Dress
+from Measurement
+join DressType on DressType.DressTypeID=Measurement.DressTypeID
+join Customer on Customer.CustomerID=Measurement.CustomerID
+where Measurement.MeasurementID = @MeasurementID;
+end
+---------------------------------------------------------
+
+USE [TailorDB]
+GO
+/****** Object:  StoredProcedure [dbo].[GetCustomerWiseOrderReceipt]    Script Date: 01/04/2016 15:58:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[GetCustomerWiseOrderReceipt]
+@CustomerID varchar(50)
+As
+Begin
+Select 
+OrderInfo.OrderID,OrderInfo.OrderNo,Customer.Name Customer,Customer.CustomerIDNo,OrderInfo.OrderDate,OrderInfo.DeliveryDate,DressType.TypeName Dress,DressType.Price EachPrice,OrderDetail.Quantity,OrderInfo.Price TotalPrice,OrderInfo.Discount,OrderInfo.PaidAmount,OrderInfo.DueAmount
+from OrderInfo
+join Customer on Customer.customerid = OrderInfo.customerid
+join OrderDetail on OrderDetail.orderid=OrderInfo.OrderID
+join DressType on DressType.dresstypeid=orderdetail.dresstypeid
+where OrderInfo.DeliveryStatus = 1
+and Customer.CustomerIDNo = @CustomerID;
+end
+
+----------------------------------------------------------------
+
+USE [TailorDB]
+GO
+/****** Object:  StoredProcedure [dbo].[GetMaterialInputDatewise]    Script Date: 01/04/2016 15:58:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[GetMaterialInputDatewise]
+(@From datetime,
+@To datetime)
+as
+select 
+Material.MaterialCode,Material.MaterialName,Material.MaterialQuantity InQty,Material.Unit,Material.PurchaseDate
+from Material
+left join OrderMaterial on OrderMaterial.MaterialCode=Material.MaterialCode
+where Material.PurchaseDate  between @From and @To;
+
+-----------------------------------------------------------------
+
+USE [TailorDB]
+GO
+/****** Object:  StoredProcedure [dbo].[GetMaterialOutDatewise]    Script Date: 01/04/2016 15:59:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[GetMaterialOutDatewise]
+(@From datetime,
+@To datetime)
+as
+Select OrderMaterial.MaterialCode,OrderMaterial.[Date],
+Material.MaterialName, OrderMaterial.MaterialQuantity MaterialOutQuantity ,
+Material.Unit
+from OrderMaterial
+inner join Material on OrderMaterial.MaterialCode= Material.MaterialCode
+where OrderMaterial.[Date]  between @From and @To;
+
+
+-------------------------------------------------------------------
+USE [TailorDB]
+GO
+/****** Object:  StoredProcedure [dbo].[GetOrderReceipt]    Script Date: 01/04/2016 16:00:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[GetOrderReceipt]
+@OrderNO varchar(50)
+as
+begin
+Select 
+OrderInfo.OrderID,
+OrderInfo.OrderNo,
+OrderInfo.OrderDate,
+OrderInfo.DeliveryDate,
+Customer.Name Customer,Customer.MobileNo,Customer.CustomerIDNo,
+DressType.TypeName,
+OrderDetail.Quantity,
+DressType.Price PriceEach,
+OrderInfo.Price TotalPrice,
+OrderInfo.PaidAmount,
+OrderInfo.Discount,
+OrderInfo.DueAmount
+from OrderInfo
+join OrderDetail on OrderDetail.OrderID = OrderInfo.OrderID
+join Customer on OrderInfo.CustomerID = Customer.CustomerID
+join DressType on OrderDetail.DressTypeID = DressType.DressTypeID
+where OrderInfo.OrderNo = @OrderNO;
+end
+
+
+--------------------------------------------------------------------
+USE [TailorDB]
+GO
+/****** Object:  StoredProcedure [dbo].[GetSingleMaterialStatus]    Script Date: 01/04/2016 16:00:39 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[GetSingleMaterialStatus]
+@MaterialCode varchar(200)
+As
+Begin
+Select OrderMaterial.MaterialCode,
+Material.MaterialName, 
+SUM(Material.MaterialQuantity) MaterialQuantityIn,
+SUM(OrderMaterial.MaterialQuantity) MaterialQuantityOut,
+Material.Unit,
+( SUM(Material.MaterialQuantity)-SUM(OrderMaterial.MaterialQuantity)) StatusNow
+from OrderMaterial
+inner join Material on OrderMaterial.MaterialCode= Material.MaterialCode
+where OrderMaterial.MaterialCode = @MaterialCode
+group by OrderMaterial.MaterialCode,Material.MaterialName,Material.Unit;
+end
+---------------------------------------------------------------------
+
+
+
+
+

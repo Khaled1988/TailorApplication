@@ -1,0 +1,40 @@
+select orderinfo.*,
+customer .name C_Name,
+dresstype.typename
+
+from orderinfo
+join customer on customer.customerid = orderinfo.customerid
+join orderdetail on orderdetail.orderid=orderinfo.OrderID
+join dresstype on dresstype.dresstypeid=orderdetail.dresstypeid
+
+
+
+---------------------------------------------------------
+
+
+DELIMITER // 
+ CREATE PROCEDURE GetAllUndeliveredOrder()
+   BEGIN
+   
+   select orderinfo.*,
+customer .name C_Name,
+dresstype.typename
+
+from orderinfo
+join customer on customer.customerid = orderinfo.customerid
+join orderdetail on orderdetail.orderid=orderinfo.OrderID
+join dresstype on dresstype.dresstypeid=orderdetail.dresstypeid
+   
+   END//
+ DELIMITER ;
+
+--------------------------------------------------
+
+Error	19	The Value expression for the textrun
+ ‘Textbox23.Paragraphs[0].TextRuns[0]’ contains an error: [BC30451] 'Order' is not declared.
+ It may be inaccessible due to its protection level.
+	D:\All Solutions USBA\Tailor_WebForm\Tailor1WebApp - V5-report\Tailor1WebApp\Report\OrderReport.rdlc	Tailor1WebApp
+
+
+-----------------------------------------
+report/orderreport

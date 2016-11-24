@@ -1,0 +1,6 @@
+https://www.youtube.com/watch?v=859BmmVOm8M
+
+
+report tab style jquery:
+
+https://jqueryui.com/tabs/#vertical
