@@ -30,22 +30,20 @@ namespace Tailor1WebApp.Views
         {
             List<Customer> listofCustomers = new List<Customer>();
             listofCustomers = tailorBLL.GetAllCustomer();
-            lvAllBrandList.DataSource = listofCustomers;
-            lvAllBrandList.DataBind();
+            if (listofCustomers.Count>0)
+            {
+                lvAllBrandList.DataSource = listofCustomers;
+                lvAllBrandList.DataBind();
+            }
+            else
+            {
+                lvAllBrandList.DataSource = null;
+                lvAllBrandList.DataBind();
+            }
+            
         }
 
-        protected void lvAllBrandList_ItemCommand(object sender, ListViewCommandEventArgs e)
-        {
-            if (e.CommandName == "LoadBrand")
-            {
-                //Response.Redirect("~/Views/MeasurementUI.aspx");
-            }
-            else if (e.CommandName == "EditCustomer")
-            {
-                int customerID = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("~/Views/CustomerUI.aspx?value1=" + customerID);
-            }
-        }
+        
 
         int lvRowCount = 0;
         protected void lvAllBrandList_ItemDataBound(object sender, ListViewItemEventArgs e)
@@ -58,10 +56,11 @@ namespace Tailor1WebApp.Views
                 Label lblName = (Label)currentItem.FindControl("lblName");
                 Label lblCUstomerIDNo = (Label)currentItem.FindControl("lblCUstomerIDNo");
                 Label lblDepartment = (Label)currentItem.FindControl("lblDepartment");
-                Label lblCustomerType = (Label)currentItem.FindControl("lblCustomerType");
+                Label lblDesignation = (Label)currentItem.FindControl("lblDesignation");
                 Label lblMobileNo = (Label)currentItem.FindControl("lblMobileNo");
                 Label lblCustomerID = (Label)currentItem.FindControl("lblCustomerID");
                 LinkButton lnkEdit = (LinkButton)currentItem.FindControl("lnkEdit");
+                LinkButton lnkMeasurement = (LinkButton)currentItem.FindControl("lnkMeasurement");
 
                 lvRowCount += 1;
                 Label lblSerialNo = (Label)currentItem.FindControl("lblSerialNo");
@@ -71,24 +70,90 @@ namespace Tailor1WebApp.Views
                 lblName.Text = customer.Name;
                 lblCUstomerIDNo.Text = customer.CustomerIDNo;
                 lblDepartment.Text = customer.Department;
-                lblCustomerType.Text = customer.CustomerType;
+                lblDesignation.Text = customer.Designation;
                 lblMobileNo.Text = customer.MobileNo;
                 lblCustomerID.Text = customer.CustomerID.ToString();
                 //lnkbtnName.CommandArgument = customer.CustomerID.ToString();
                 //lnkbtnName.CommandName = "LoadBrand";
                 lnkEdit.CommandArgument = customer.CustomerID.ToString();
                 lnkEdit.CommandName = "EditCustomer";
+                lnkMeasurement.CommandArgument = customer.CustomerID.ToString();
+                lnkMeasurement.CommandName = "CustomerMeasurement";
             }
         }
 
-
+        protected void lvAllBrandList_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "CustomerMeasurement")
+            {
+                int customerID = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("~/Views/MeasurementSearch.aspx?customerid=" + customerID);
+            }
+            else if (e.CommandName == "EditCustomer")
+            {
+                int customerID = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("~/Views/CustomerUI.aspx?customerid=" + customerID);
+            }
+        }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            string searchText = txtSearchText.Text;
             List<Customer> listofCustomers = new List<Customer>();
-            listofCustomers = tailorBLL.GetAllCustomerByName(searchText);
-            lvAllBrandList.DataSource = listofCustomers;
-            lvAllBrandList.DataBind();
+            string CustomerName = txtCustomerName.Text.Trim();
+            string customerID = txtCustomerID.Text.Trim();
+            string customerMobile = txtCustomerMobile.Text.Trim();
+            if (customerID =="" && CustomerName =="" && customerMobile =="")
+            {
+                LoadCustomerList();
+            }
+            else
+            {
+                if (CustomerName !="")
+                {
+                    listofCustomers = tailorBLL.GetAllCustomerByName(CustomerName);
+                    if (listofCustomers.Count>0)
+                    {
+                        lvAllBrandList.DataSource = listofCustomers;
+                        lvAllBrandList.DataBind();
+                    }
+                    else
+                    {
+                        lvAllBrandList.DataSource = null;
+                        lvAllBrandList.DataBind();
+                    }
+                }
+                else if (customerID!="")
+                {
+                    listofCustomers = tailorBLL.GetAllCustomerByID(customerID);
+                    if (listofCustomers.Count > 0)
+                    {
+                        lvAllBrandList.DataSource = listofCustomers;
+                        lvAllBrandList.DataBind();
+                    }
+                    else
+                    {
+                        lvAllBrandList.DataSource = null;
+                        lvAllBrandList.DataBind();
+                    }
+                }
+                else
+                {
+                    listofCustomers = tailorBLL.GetAllCustomerByMobile(customerMobile);
+                    if (listofCustomers.Count > 0)
+                    {
+                        lvAllBrandList.DataSource = listofCustomers;
+                        lvAllBrandList.DataBind();
+                    }
+                    else
+                    {
+                        lvAllBrandList.DataSource = null;
+                        lvAllBrandList.DataBind();
+                    }
+                }
+            }
+            
+            //listofCustomers = tailorBLL.GetAllCustomerByName(searchText);
+            //lvAllBrandList.DataSource = listofCustomers;
+            //lvAllBrandList.DataBind();
         }
 
         protected void OnPagePropertyChanging(object sender, PagePropertiesChangingEventArgs e)

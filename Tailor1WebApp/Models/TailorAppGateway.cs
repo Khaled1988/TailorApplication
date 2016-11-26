@@ -64,13 +64,69 @@ namespace Tailor1WebApp.Models
             connection.Close();
             return customers;
         }
-        public List<Customer> GetAllCustomerByName(string searchText)
+        public List<Customer> GetAllCustomerByName(string customerName)
         {
             connection.Open();
-            string query = string.Format("SELECT * FROM Customer WHERE Name LIKE '%{0}%'", searchText);
+            string query = string.Format("SELECT * FROM Customer WHERE Name LIKE '%{0}%'", customerName);
             SqlCommand command = new SqlCommand(query, connection);
             SqlDataReader aReader = command.ExecuteReader();
             List<Customer> customers = new List<Customer>();            
+            if (aReader.HasRows)
+            {
+                while (aReader.Read())
+                {
+                    Customer aCustomer = new Customer();
+                    aCustomer.CustomerID = (int)aReader[0];
+                    aCustomer.CustomerIDNo = aReader[1].ToString();
+                    aCustomer.Name = aReader[2].ToString();
+                    aCustomer.Department = aReader[3].ToString();
+                    aCustomer.MobileNo = aReader[4].ToString();
+                    aCustomer.Gender = aReader[5].ToString();
+                    aCustomer.Address = aReader[6].ToString();
+                    aCustomer.CustomerType = aReader[7].ToString();
+                    aCustomer.Designation = aReader[8].ToString();
+                    aCustomer.WorkStation = aReader[9].ToString();
+                    customers.Add(aCustomer);
+                }
+            }
+            connection.Close();
+            return customers;
+        }
+        public List<Customer> GetAllCustomerByID(string customerID)
+        {
+            connection.Open();
+            string query = string.Format("SELECT * FROM Customer WHERE CustomerIDNo LIKE '%{0}%'", customerID);
+            SqlCommand command = new SqlCommand(query, connection);
+            SqlDataReader aReader = command.ExecuteReader();
+            List<Customer> customers = new List<Customer>();
+            if (aReader.HasRows)
+            {
+                while (aReader.Read())
+                {
+                    Customer aCustomer = new Customer();
+                    aCustomer.CustomerID = (int)aReader[0];
+                    aCustomer.CustomerIDNo = aReader[1].ToString();
+                    aCustomer.Name = aReader[2].ToString();
+                    aCustomer.Department = aReader[3].ToString();
+                    aCustomer.MobileNo = aReader[4].ToString();
+                    aCustomer.Gender = aReader[5].ToString();
+                    aCustomer.Address = aReader[6].ToString();
+                    aCustomer.CustomerType = aReader[7].ToString();
+                    aCustomer.Designation = aReader[8].ToString();
+                    aCustomer.WorkStation = aReader[9].ToString();
+                    customers.Add(aCustomer);
+                }
+            }
+            connection.Close();
+            return customers;
+        }
+        public List<Customer> GetAllCustomerByMobile(string customerMobile)
+        {
+            connection.Open();
+            string query = string.Format("SELECT * FROM Customer WHERE MobileNo LIKE '%{0}%'", customerMobile);
+            SqlCommand command = new SqlCommand(query, connection);
+            SqlDataReader aReader = command.ExecuteReader();
+            List<Customer> customers = new List<Customer>();
             if (aReader.HasRows)
             {
                 while (aReader.Read())
@@ -349,10 +405,84 @@ namespace Tailor1WebApp.Models
             connection.Close();
             return customerMeasurements;
         }
-        public List<CustomerMeasurement> GetAllCustomerMeasurementByName(string searchText)
+        public List<CustomerMeasurement> GetAllCustomerMeasurementByName(string customername)
         {
             connection.Open();
-            string query = string.Format("SELECT Measurement.* ,DressType.TypeName,Customer.Name,Customer.CustomerIDNo,Customer.MobileNo FROM Measurement INNER JOIN Customer on Measurement.CustomerID = Customer.CustomerID INNER JOIN DressType on Measurement.DressTypeID = DressType.DressTypeID WHERE Customer.Name LIKE '%{0}%' ORDER BY MeasurementID DESC", searchText);
+            string query = string.Format("SELECT Measurement.* ,DressType.TypeName,Customer.Name,Customer.CustomerIDNo,Customer.MobileNo FROM Measurement INNER JOIN Customer on Measurement.CustomerID = Customer.CustomerID INNER JOIN DressType on Measurement.DressTypeID = DressType.DressTypeID WHERE Customer.Name LIKE '%{0}%' ORDER BY MeasurementID DESC", customername);
+            SqlCommand command = new SqlCommand(query, connection);
+            SqlDataReader aReader = command.ExecuteReader();
+            List<CustomerMeasurement> customerMeasurements = new List<CustomerMeasurement>();
+            if (aReader.HasRows)
+            {
+                while (aReader.Read())
+                {
+                    CustomerMeasurement aCustomerMeasurement = new CustomerMeasurement();
+                    aCustomerMeasurement.MeasurementID = (int)aReader[0];
+                    aCustomerMeasurement.CustomerID = (int)aReader[1];
+                    aCustomerMeasurement.DressTypeID = (int)aReader[2];
+                    aCustomerMeasurement.Length = (double)aReader[3];
+                    aCustomerMeasurement.Chest = (double)aReader[4];
+                    aCustomerMeasurement.WaistBelly = (double)aReader[5];
+                    aCustomerMeasurement.Hip = (double)aReader[6];
+                    aCustomerMeasurement.Shoulder = (double)aReader[7];
+                    aCustomerMeasurement.SleeveLength = (double)aReader[8];
+                    aCustomerMeasurement.CuffOpening = (double)aReader[9];
+                    aCustomerMeasurement.Neck = (double)aReader[10];
+                    aCustomerMeasurement.AllRoundRise = (double)aReader[11];
+                    aCustomerMeasurement.Thaigh = (double)aReader[12];
+                    aCustomerMeasurement.BottomOpening = (double)aReader[13];
+                    aCustomerMeasurement.DressTypeName = aReader[14].ToString();
+                    aCustomerMeasurement.CustomerName = aReader[15].ToString();
+                    aCustomerMeasurement.CustomerIDCard = aReader[16].ToString();
+                    aCustomerMeasurement.CustomerMobile = aReader[17].ToString();
+
+                    customerMeasurements.Add(aCustomerMeasurement);
+                }
+            }
+            connection.Close();
+            return customerMeasurements;
+        }
+        public List<CustomerMeasurement> GetCustomerMeasurementByCustomerID(int customerid)
+        {
+            connection.Open();
+            string query = string.Format("SELECT Measurement.* ,DressType.TypeName,Customer.Name,Customer.CustomerIDNo,Customer.MobileNo FROM Measurement INNER JOIN Customer on Measurement.CustomerID = Customer.CustomerID INNER JOIN DressType on Measurement.DressTypeID = DressType.DressTypeID WHERE Customer.CustomerID = '{0}' ORDER BY MeasurementID DESC", customerid);
+            SqlCommand command = new SqlCommand(query, connection);
+            SqlDataReader aReader = command.ExecuteReader();
+            List<CustomerMeasurement> customerMeasurements = new List<CustomerMeasurement>();
+            if (aReader.HasRows)
+            {
+                while (aReader.Read())
+                {
+                    CustomerMeasurement aCustomerMeasurement = new CustomerMeasurement();
+                    aCustomerMeasurement.MeasurementID = (int)aReader[0];
+                    aCustomerMeasurement.CustomerID = (int)aReader[1];
+                    aCustomerMeasurement.DressTypeID = (int)aReader[2];
+                    aCustomerMeasurement.Length = (double)aReader[3];
+                    aCustomerMeasurement.Chest = (double)aReader[4];
+                    aCustomerMeasurement.WaistBelly = (double)aReader[5];
+                    aCustomerMeasurement.Hip = (double)aReader[6];
+                    aCustomerMeasurement.Shoulder = (double)aReader[7];
+                    aCustomerMeasurement.SleeveLength = (double)aReader[8];
+                    aCustomerMeasurement.CuffOpening = (double)aReader[9];
+                    aCustomerMeasurement.Neck = (double)aReader[10];
+                    aCustomerMeasurement.AllRoundRise = (double)aReader[11];
+                    aCustomerMeasurement.Thaigh = (double)aReader[12];
+                    aCustomerMeasurement.BottomOpening = (double)aReader[13];
+                    aCustomerMeasurement.DressTypeName = aReader[14].ToString();
+                    aCustomerMeasurement.CustomerName = aReader[15].ToString();
+                    aCustomerMeasurement.CustomerIDCard = aReader[16].ToString();
+                    aCustomerMeasurement.CustomerMobile = aReader[17].ToString();
+
+                    customerMeasurements.Add(aCustomerMeasurement);
+                }
+            }
+            connection.Close();
+            return customerMeasurements;
+        }
+        public List<CustomerMeasurement> GetAllCustomerMeasurementByMobile(string customerMobile)
+        {
+            connection.Open();
+            string query = string.Format("SELECT Measurement.* ,DressType.TypeName,Customer.Name,Customer.CustomerIDNo,Customer.MobileNo FROM Measurement INNER JOIN Customer on Measurement.CustomerID = Customer.CustomerID INNER JOIN DressType on Measurement.DressTypeID = DressType.DressTypeID WHERE Customer.MobileNo LIKE '%{0}%' ORDER BY MeasurementID DESC", customerMobile);
             SqlCommand command = new SqlCommand(query, connection);
             SqlDataReader aReader = command.ExecuteReader();
             List<CustomerMeasurement> customerMeasurements = new List<CustomerMeasurement>();
@@ -850,10 +980,42 @@ namespace Tailor1WebApp.Models
             return supplierProducts; 
         }
 
-        public List<SupplierProduct> GetAllSupplierProductBySupplierName(string searchText)
+        public List<SupplierProduct> GetAllSupplierProductBySupplierName(string supplierName)
         {
             connection.Open();
-            string query = string.Format("SELECT Supplier.*,Material.MaterialCode,Material.MaterialName,Material.MaterialOtherInfo,Material.MaterialPrice,Material.MaterialQuantity,Material.PurchaseDate,Material.Unit,Material.MaterialID FROM Supplier join Material on Material.SupplierID=Supplier.SupplierID where Supplier.SupplierName LIKE '%{0}%' ORDER BY Supplier.SupplierID DESC", searchText);
+            string query = string.Format("SELECT Supplier.*,Material.MaterialCode,Material.MaterialName,Material.MaterialOtherInfo,Material.MaterialPrice,Material.MaterialQuantity,Material.PurchaseDate,Material.Unit,Material.MaterialID FROM Supplier join Material on Material.SupplierID=Supplier.SupplierID where Supplier.SupplierName LIKE '%{0}%' ORDER BY Supplier.SupplierID DESC", supplierName);
+            SqlCommand command = new SqlCommand(query, connection);
+            SqlDataReader aReader = command.ExecuteReader();
+            List<SupplierProduct> supplierProducts = new List<SupplierProduct>();
+            if (aReader.HasRows)
+            {
+                while (aReader.Read())
+                {
+                    SupplierProduct aSupplierProduct = new SupplierProduct();
+                    aSupplierProduct.SupplierProductID = (int)aReader[0];
+                    aSupplierProduct.SupplierCode = aReader[1].ToString();
+                    aSupplierProduct.SupplierName = aReader[2].ToString();
+                    aSupplierProduct.SupplierAddress = aReader[3].ToString();
+                    aSupplierProduct.SupplierMobile = aReader[4].ToString();
+                    aSupplierProduct.MaterialCode = aReader[5].ToString();
+                    aSupplierProduct.MaterialName = aReader[6].ToString();
+                    aSupplierProduct.OtherInformation = aReader[7].ToString();
+                    aSupplierProduct.MaterialPrice = Convert.ToDouble(aReader[8]);
+                    aSupplierProduct.MaterialQuantity = Convert.ToDouble(aReader[9]);
+                    aSupplierProduct.PurchaseDate = Convert.ToDateTime(aReader[10]);
+                    aSupplierProduct.MaterialUnit = aReader[11].ToString();
+                    aSupplierProduct.MaterialID = (int)aReader[12];
+
+                    supplierProducts.Add(aSupplierProduct);
+                }
+            }
+            connection.Close();
+            return supplierProducts; 
+        }
+        public List<SupplierProduct> GetAllSupplierProductBySupplierMobile(string supplierMobile)
+        {
+            connection.Open();
+            string query = string.Format("SELECT Supplier.*,Material.MaterialCode,Material.MaterialName,Material.MaterialOtherInfo,Material.MaterialPrice,Material.MaterialQuantity,Material.PurchaseDate,Material.Unit,Material.MaterialID FROM Supplier join Material on Material.SupplierID=Supplier.SupplierID where Supplier.SupplierMobile LIKE '%{0}%' ORDER BY Supplier.SupplierID DESC", supplierMobile);
             SqlCommand command = new SqlCommand(query, connection);
             SqlDataReader aReader = command.ExecuteReader();
             List<SupplierProduct> supplierProducts = new List<SupplierProduct>();
@@ -1165,15 +1327,6 @@ namespace Tailor1WebApp.Models
             return "Something wrong..!!";
         }
         #endregion
-
-
-
-
-
-
-
-
-
 
 
 

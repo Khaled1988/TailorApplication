@@ -36,21 +36,21 @@
             <div class="form-group">
                 <asp:Label runat="server" CssClass="col-md-2 control-label">Supplier Name</asp:Label>
                 <div class="col-md-10">
-                    <asp:TextBox runat="server" ID="txtSupplierName" CssClass="form-control" />
+                    <asp:TextBox runat="server" ID="txtSupplierName" CssClass="form-control" placeholder="Enter Supplier Name" />
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSupplierName" CssClass="text-danger" ErrorMessage="Supplier Name is required." />
                 </div>
             </div>
             <div class="form-group">
                 <asp:Label runat="server" CssClass="col-md-2 control-label">Address</asp:Label>
                 <div class="col-md-10">
-                    <asp:TextBox runat="server" ID="txtSupplierAddress" CssClass="form-control" TextMode="MultiLine" Width="450px" Height="70px" />
+                    <asp:TextBox runat="server" ID="txtSupplierAddress" CssClass="form-control" TextMode="MultiLine" Width="450px" Height="70px" placeholder="Enter Supplier Address" />
                     <%--<asp:RequiredFieldValidator runat="server" ControlToValidate="txtDepartment" CssClass="text-danger" ErrorMessage="This field is required." />--%>
                 </div>
             </div>
             <div class="form-group">
                 <asp:Label runat="server" CssClass="col-md-2 control-label">Mobile</asp:Label>
                 <div class="col-md-10">
-                    <asp:TextBox runat="server" ID="txtSupplierMobile" CssClass="form-control" />
+                    <asp:TextBox runat="server" ID="txtSupplierMobile" CssClass="form-control" placeholder="Enter Supplier Mobile" />
                     <%--<asp:RequiredFieldValidator runat="server" ControlToValidate="txtCustomerMobile" CssClass="text-danger" ErrorMessage="This field is required." />--%>
                      <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtSupplierMobile" ErrorMessage="Enter Correct Mobile No" ValidationExpression="^(?:\d|[,\+])+$" CssClass="text-danger"></asp:RegularExpressionValidator><br />
                 </div>
@@ -58,14 +58,14 @@
             <div class="form-group">
                 <asp:Label runat="server" CssClass="col-md-2 control-label">Accessories / Material</asp:Label>
                 <div class="col-md-10">
-                    <asp:TextBox runat="server" ID="txtMaterialName" CssClass="form-control" TextMode="MultiLine" Width="450px" Height="70px" />
+                    <asp:TextBox runat="server" ID="txtMaterialName" CssClass="form-control" TextMode="MultiLine" Width="450px" Height="70px" placeholder="Enter Accessories / Material information" />
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMaterialName" CssClass="text-danger" ErrorMessage="Accessories / Material information is required." />
                 </div>
             </div>
             <div class="form-group">
                 <asp:Label runat="server" CssClass="col-md-2 control-label">Price</asp:Label>
                 <div class="col-md-10">
-                    <asp:TextBox runat="server" ID="txtMaterialPrice" CssClass="form-control" />
+                    <asp:TextBox runat="server" ID="txtMaterialPrice" CssClass="form-control" placeholder="Enter Accessories / Material Price"  />
                     <%--<asp:RequiredFieldValidator runat="server" ControlToValidate="txtMaterialPrice" CssClass="text-danger" ErrorMessage="This field is required." />--%>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator11" ControlToValidate="txtMaterialPrice" ValidationExpression="^[0-9]*\.?[0-9]+$" Display="Static" EnableClientScript="true" ErrorMessage="Please enter numbers only" runat="server" CssClass="text-danger" />
                 </div>
@@ -74,7 +74,7 @@
                 <div class="form-inline">
                     <asp:Label runat="server" CssClass="col-md-2 control-label">Quantity</asp:Label>
                     <div class="col-md-7">
-                        <asp:TextBox runat="server" ID="txtQuantity" CssClass="form-control" />
+                        <asp:TextBox runat="server" ID="txtQuantity" CssClass="form-control" placeholder="Enter Accessories / Material Quantity" />
                         <asp:DropDownList runat="server" ID="ddlMeasurementUnit" CssClass="form-control" Width="150px" AppendDataBoundItems="True">
                             <asp:ListItem Selected="True" Value="sl1">-SELECT Unit-</asp:ListItem>
                             <asp:ListItem Value="meter">Meter</asp:ListItem>
@@ -91,7 +91,7 @@
             <div class="form-group">
                 <asp:Label runat="server" CssClass="col-md-2 control-label">Material Code</asp:Label>
                 <div class="col-md-10">
-                    <asp:TextBox runat="server" ID="txtMaterialCode" CssClass="form-control" />
+                    <asp:TextBox runat="server" ID="txtMaterialCode" CssClass="form-control" placeholder="Enter Accessories / Material Code" />
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMaterialCode" CssClass="text-danger" ErrorMessage="Material Code is required." />
                 </div>
             </div>
@@ -99,8 +99,8 @@
                 <asp:Label runat="server" CssClass="col-md-2 control-label">Purchase Date</asp:Label>
                 <div class="col-md-10">
                     <%--<asp:TextBox runat="server" ID="txtPurchaseDate" CssClass="form-control col-md-2 datepicker" data-provide="datepicker" />--%>
-                    <asp:TextBox runat="server" ID="txtPurchaseDate" CssClass="form-control"></asp:TextBox>
-                    <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtPurchaseDate" Format="dd-MM-yyyy" />
+                    <asp:TextBox runat="server" ID="txtPurchaseDate" CssClass="form-control" placeholder="Enter Accessories/Material Purchase Date"></asp:TextBox>
+                    <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtPurchaseDate" Format="yyyy-MM-dd" />
                 </div>
             </div>
             <div class="form-group">

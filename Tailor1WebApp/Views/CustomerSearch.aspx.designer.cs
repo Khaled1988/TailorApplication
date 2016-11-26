@@ -22,13 +22,31 @@ namespace Tailor1WebApp.Views {
         protected global::System.Web.UI.WebControls.Label lblUserName;
         
         /// <summary>
-        /// txtSearchText control.
+        /// txtCustomerName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearchText;
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerName;
+        
+        /// <summary>
+        /// txtCustomerID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerID;
+        
+        /// <summary>
+        /// txtCustomerMobile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerMobile;
         
         /// <summary>
         /// btnSearch control.

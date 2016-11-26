@@ -45,35 +45,64 @@ namespace Tailor1WebApp.Views
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            string searchText = txtSearchText.Text;
-            if (searchText !="")
+            List<SupplierProduct> listofSupplierProducts = new List<SupplierProduct>();
+            string suppliarName = txtSuplierName.Text.Trim();
+            string supplierMobile = txtSuplierPhone.Text.Trim();
+            if (suppliarName=="" && supplierMobile =="")
             {
-                List<SupplierProduct> listofSupplierProducts = new List<SupplierProduct>();
-                listofSupplierProducts = tailorBLL.GetAllSupplierProductBySupplierName(searchText);
-
-                if (listofSupplierProducts.Count > 0)
-                {
-                    lvAllSupplierList.DataSource = listofSupplierProducts;
-                    lvAllSupplierList.DataBind();
-                }
-                else
-                {
-                    lvAllSupplierList.DataSource = null;
-                    lvAllSupplierList.DataBind();
-                }
+                LoadSupplierProductList();
             }
             else
             {
-                //System.Text.StringBuilder strbuilder = new System.Text.StringBuilder();
-                //strbuilder.Append("<script type = 'text/javascript'>");
-                //strbuilder.Append("window.onload=function(){");
-                //strbuilder.Append("alert('");
-                //strbuilder.Append("Enter Supplier Name");
-                //strbuilder.Append("')};");
-                //strbuilder.Append("</script>");
-                //ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", strbuilder.ToString());
-                LoadSupplierProductList();
+                if (txtSuplierName.Text!="")
+                {
+                    listofSupplierProducts = tailorBLL.GetAllSupplierProductBySupplierName(suppliarName);
+                    if (listofSupplierProducts.Count > 0)
+                    {
+                        lvAllSupplierList.DataSource = listofSupplierProducts;
+                        lvAllSupplierList.DataBind();
+                    }
+                    else
+                    {
+                        lvAllSupplierList.DataSource = null;
+                        lvAllSupplierList.DataBind();
+                    }
+                }
+                else
+                {
+                    listofSupplierProducts = tailorBLL.GetAllSupplierProductBySupplierMobile(supplierMobile);
+                    if (listofSupplierProducts.Count > 0)
+                    {
+                        lvAllSupplierList.DataSource = listofSupplierProducts;
+                        lvAllSupplierList.DataBind();
+                    }
+                    else
+                    {
+                        lvAllSupplierList.DataSource = null;
+                        lvAllSupplierList.DataBind();
+                    }
+                }
             }
+            //if (searchText !="")
+            //{
+            //    List<SupplierProduct> listofSupplierProducts = new List<SupplierProduct>();
+            //    listofSupplierProducts = tailorBLL.GetAllSupplierProductBySupplierName(searchText);
+
+            //    if (listofSupplierProducts.Count > 0)
+            //    {
+            //        lvAllSupplierList.DataSource = listofSupplierProducts;
+            //        lvAllSupplierList.DataBind();
+            //    }
+            //    else
+            //    {
+            //        lvAllSupplierList.DataSource = null;
+            //        lvAllSupplierList.DataBind();
+            //    }
+            //}
+            //else
+            //{                
+            //    LoadSupplierProductList();
+            //}
             
         }
 
@@ -111,7 +140,7 @@ namespace Tailor1WebApp.Views
                 lblQuantity.Text = supplierProduct.MaterialQuantity.ToString();
                 lblUnit.Text = supplierProduct.MaterialUnit;
                 lblMaterialCode.Text = supplierProduct.MaterialCode;
-                lblPurchaseDate.Text = supplierProduct.PurchaseDate.ToShortDateString();
+                lblPurchaseDate.Text = supplierProduct.PurchaseDate.ToString("dd-MM-YYYY");
                 lblOtherInfo.Text = supplierProduct.OtherInformation;
                 lblMaterialID.Text = supplierProduct.MaterialID.ToString();
 

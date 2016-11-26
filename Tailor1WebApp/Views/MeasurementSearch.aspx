@@ -30,13 +30,21 @@
                     <asp:Button runat="server" ID="btnSearch" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
                 </div>
             </div>--%>
-            <div class="form-group">
+            <%--<div class="form-group">
                 <div class="form-inline">
                     <asp:Label runat="server" CssClass="col-md-3 control-label">Customer Name</asp:Label>
                     <div class="col-md-9">
                         <asp:TextBox runat="server" ID="txtSearchText" CssClass="form-control" Width="165px" placeholder="Enter Customer Name" />
                         <asp:Button runat="server" ID="btnSearch" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />                    
                     </div>                    
+                </div>
+            </div>--%>
+            <div class="form-group">
+                <div class="form-inline">                    
+                    <asp:TextBox runat="server" ID="txtCustomerName" CssClass="form-control" Width="200px" placeholder="Enter Customer Name" />
+                    <asp:TextBox runat="server" ID="txtMobile" CssClass="form-control" Width="200px" placeholder="Enter Customer Mobile No." />
+                    <asp:Button runat="server" ID="btnSearch" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+                    <asp:Label ID="lblCustomerID" runat="server" Text="" Visible="false"></asp:Label>
                 </div>
             </div>
             <br /><br />

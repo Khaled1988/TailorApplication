@@ -1,19 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SupplierSearch.aspx.cs" Inherits="Tailor1WebApp.Views.SupplierSearch" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="form-inline">
         <br />
         <fieldset class="scheduler-border">
             <legend class="scheduler-border">Supplier Search</legend>
-            
+
             <div style="text-align: right">
                 <asp:Label ID="lblUserName" runat="server" Visible="false"></asp:Label>
             </div>
-            
-            <asp:HyperLink runat="server" Text="New Supplier" NavigateUrl="~/Views/SupplierUI.aspx" Font-Underline="true"></asp:HyperLink>
+
+            <asp:HyperLink runat="server" Text="Add New Supplier" NavigateUrl="~/Views/SupplierUI.aspx" Font-Underline="true"></asp:HyperLink>
             <br />
             <br />
 
-            
+
             <%--<div class="form-group">
                 <asp:Label runat="server" CssClass="col-md-5 control-label">Enter Name</asp:Label>
                 <div class="col-md-7">
@@ -27,17 +28,27 @@
             </div>
             <br /><br />--%>
 
-            <div class="form-group">
+            <%--<div class="form-group">
                 <div class="form-inline">
                     <asp:Label runat="server" CssClass="col-md-3 control-label">Supplier Name</asp:Label>
                     <div class="col-md-9">
                         <asp:TextBox runat="server" ID="txtSearchText" CssClass="form-control" Width="160px" placeholder="Enter Supplier Name" />
-                        <asp:Button runat="server" ID="btnSearch" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />                    
-                    </div>                    
+                        <asp:Button runat="server" ID="btnSearch" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+                    </div>
                 </div>
             </div>
-            <br /><br />
-            
+            <br />
+            <br />--%>
+            <div class="form-group">
+                <div class="form-inline">
+                    <asp:TextBox runat="server" ID="txtSuplierName" CssClass="form-control" Width="200px" placeholder="Enter Supplier Name" />
+                    <asp:TextBox runat="server" ID="txtSuplierPhone" CssClass="form-control" Width="200px" placeholder="Enter Supplier Contact No." />
+                    <asp:Button runat="server" ID="btnSearch" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+                </div>
+            </div>
+            <br />
+            <br />
+
             <asp:ListView ID="lvAllSupplierList" runat="server" DataKeyNames="SupplierProductID" OnItemCommand="lvAllSupplierList_ItemCommand"
                 OnItemDataBound="lvAllSupplierList_ItemDataBound" OnPagePropertiesChanging="OnPagePropertyChanging">
                 <LayoutTemplate>
@@ -45,7 +56,7 @@
                         <tr id="trHead" runat="server">
                             <th id="th3" runat="server" align="center" width="5%">SL #
                             </th>
-                            <th id="th1" runat="server" text-align="center">Supplier COde
+                            <th id="th1" runat="server" text-align="center">Supplier Code
                             </th>
                             <th id="th16" runat="server" text-align="center">Supplier Name
                             </th>
@@ -53,7 +64,7 @@
                             </th>
                             <th id="th2" runat="server" align="center">Mobile
                             </th>
-                            <th id="th4" runat="server" align="center">Accesories
+                            <th id="th4" runat="server" align="center">Accesories/Material
                             </th>
                             <th id="th5" runat="server" align="center">Price
                             </th>
@@ -66,9 +77,9 @@
                             <th id="th9" runat="server" align="center">Purchase Date
                             </th>
                             <th id="th10" runat="server" align="center">Other Info
-                            </th>                            
-                            <th id="th15" runat="server" align="center" >Action
-                            </th>                            
+                            </th>
+                            <th id="th15" runat="server" align="center">Action
+                            </th>
                         </tr>
                         <tbody id="itemPlaceholder" runat="server">
                         </tbody>
@@ -127,7 +138,7 @@
                         <td align="left">
                             <asp:LinkButton ID="lnkEdit" runat="server" CausesValidation="false" Text="Edit"></asp:LinkButton>
                             <asp:Label ID="lblMaterialID" runat="server" ForeColor="Black" Visible="false"></asp:Label>
-                        </td>                        
+                        </td>
                     </tr>
                 </ItemTemplate>
                 <AlternatingItemTemplate>
@@ -171,7 +182,7 @@
                         <td align="left">
                             <asp:LinkButton ID="lnkEdit" runat="server" CausesValidation="false" Text="Edit"></asp:LinkButton>
                             <asp:Label ID="lblMaterialID" runat="server" ForeColor="Black" Visible="false"></asp:Label>
-                        </td>                        
+                        </td>
                     </tr>
                 </AlternatingItemTemplate>
                 <EmptyDataTemplate>

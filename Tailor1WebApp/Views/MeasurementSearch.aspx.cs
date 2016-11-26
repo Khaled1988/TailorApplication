@@ -23,6 +23,25 @@ namespace Tailor1WebApp.Views
                     lblUserName.Visible = true;
                     lblUserName.Text = "Welcome " + Session["UserName"].ToString();
                 }
+                int customerid = Convert.ToInt32(Request["customerid"]);
+                lblCustomerID.Text = customerid.ToString();
+                if (customerid > 0)
+                {
+                    List<Customer> customerList = new List<Customer>();
+                    List<CustomerMeasurement> listofCustomerMeasurements = new List<CustomerMeasurement>();
+                    customerList = tailorBLL.GetAllCustomerByCustomerID(customerid);
+                    foreach (var item in customerList)
+                    {
+                        txtCustomerName.Text = item.Name;
+                        txtMobile.Text = item.MobileNo;
+                    }
+                    listofCustomerMeasurements = tailorBLL.GetCustomerMeasurementByCustomerID(customerid);
+                    if (listofCustomerMeasurements.Count > 0)
+                    {
+                        lvAllMeasurementList.DataSource = listofCustomerMeasurements;
+                        lvAllMeasurementList.DataBind();
+                    }
+                }
             }
         }
 
@@ -30,17 +49,60 @@ namespace Tailor1WebApp.Views
         {
             List<CustomerMeasurement> listofCustomerMeasurements = new List<CustomerMeasurement>();
             listofCustomerMeasurements = tailorBLL.GetAllCustomerMeasurement();
-            lvAllMeasurementList.DataSource = listofCustomerMeasurements;
-            lvAllMeasurementList.DataBind();
+            if (listofCustomerMeasurements.Count > 0)
+            {
+                lvAllMeasurementList.DataSource = listofCustomerMeasurements;
+                lvAllMeasurementList.DataBind();
+            }
+            else
+            {
+                lvAllMeasurementList.DataSource = null;
+                lvAllMeasurementList.DataBind();
+            }
+
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            string searchText = txtSearchText.Text;
             List<CustomerMeasurement> listofCustomerMeasurements = new List<CustomerMeasurement>();
-            listofCustomerMeasurements = tailorBLL.GetAllCustomerMeasurementByName(searchText);
-            lvAllMeasurementList.DataSource = listofCustomerMeasurements;
-            lvAllMeasurementList.DataBind();
+            string customerName = txtCustomerName.Text.Trim();
+            string customerMobile = txtMobile.Text.Trim();
+
+            if (customerName == "" && customerMobile == "")
+            {
+                LoadMeasurementList();
+            }
+            else
+            {
+                if (customerName != "")
+                {
+                    listofCustomerMeasurements = tailorBLL.GetAllCustomerMeasurementByName(customerName);
+                    if (listofCustomerMeasurements.Count > 0)
+                    {
+                        lvAllMeasurementList.DataSource = listofCustomerMeasurements;
+                        lvAllMeasurementList.DataBind();
+                    }
+                    else
+                    {
+                        lvAllMeasurementList.DataSource = null;
+                        lvAllMeasurementList.DataBind();
+                    }
+                }
+                else
+                {
+                    listofCustomerMeasurements = tailorBLL.GetAllCustomerMeasurementByMobile(customerMobile);
+                    if (listofCustomerMeasurements.Count > 0)
+                    {
+                        lvAllMeasurementList.DataSource = listofCustomerMeasurements;
+                        lvAllMeasurementList.DataBind();
+                    }
+                    else
+                    {
+                        lvAllMeasurementList.DataSource = null;
+                        lvAllMeasurementList.DataBind();
+                    }
+                }
+            }
         }
 
         int lvRowCount = 0;

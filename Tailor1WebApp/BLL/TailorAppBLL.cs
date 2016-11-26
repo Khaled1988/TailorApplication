@@ -35,16 +35,17 @@ namespace Tailor1WebApp.BLL
         {
             return tailorGateway.GetAllCustomer();
         }
-        public List<Customer> GetAllCustomerByName(string searchText)
+        public List<Customer> GetAllCustomerByName(string customerName)
+        {           
+            return tailorGateway.GetAllCustomerByName(customerName);           
+        }
+        public List<Customer> GetAllCustomerByID(string customerID)
         {
-            if (searchText == string.Empty)
-            {
-                return tailorGateway.GetAllCustomer();
-            }
-            else
-            {
-                return tailorGateway.GetAllCustomerByName(searchText);
-            }
+            return tailorGateway.GetAllCustomerByID(customerID);           
+        }
+        public List<Customer> GetAllCustomerByMobile(string customerMobile)
+        {
+            return tailorGateway.GetAllCustomerByMobile(customerMobile);           
         }
         public int GetMaxCustomerID()
         {
@@ -58,9 +59,13 @@ namespace Tailor1WebApp.BLL
         {
             return tailorGateway.GetAllCustomerMeasurement();
         }
-        public List<CustomerMeasurement> GetAllCustomerMeasurementByName(string searchText)
+        public List<CustomerMeasurement> GetAllCustomerMeasurementByName(string customername)
         {
-            return tailorGateway.GetAllCustomerMeasurementByName(searchText);
+            return tailorGateway.GetAllCustomerMeasurementByName(customername);
+        }
+        public List<CustomerMeasurement> GetAllCustomerMeasurementByMobile(string customerMobile)
+        {
+            return tailorGateway.GetAllCustomerMeasurementByMobile(customerMobile);
         }
         public List<Customer> GetAllCustomerByCustomerID(int customerID)
         {
@@ -70,6 +75,11 @@ namespace Tailor1WebApp.BLL
         {
             return tailorGateway.UpdateCustomer(aCustomer, customerIdHidden);
         }
+        public List<CustomerMeasurement> GetCustomerMeasurementByCustomerID(int customerid)
+        {
+            return tailorGateway.GetCustomerMeasurementByCustomerID(customerid);
+        }
+        
         #endregion
 
         #region User
@@ -250,9 +260,13 @@ namespace Tailor1WebApp.BLL
         {
             return tailorGateway.GetAllSupplierProduct();
         }
-        public List<SupplierProduct> GetAllSupplierProductBySupplierName(string searchText)
+        public List<SupplierProduct> GetAllSupplierProductBySupplierName(string supplierName)
         {
-            return tailorGateway.GetAllSupplierProductBySupplierName(searchText);
+            return tailorGateway.GetAllSupplierProductBySupplierName(supplierName);
+        }
+        public List<SupplierProduct> GetAllSupplierProductBySupplierMobile(string supplierMobile)
+        {
+            return tailorGateway.GetAllSupplierProductBySupplierMobile(supplierMobile);
         }
         public List<Supplier> GetAllSupplierBySupplierID(int supplierID)
         {
@@ -274,20 +288,7 @@ namespace Tailor1WebApp.BLL
         {
             return tailorGateway.GetAllMaterial();
         }
-        //public string SaveOrderMaterial(OrderMaterial orderMaterial)
-        //{
-        //    //if (HasthisOrderNo(orderMaterial.OrderNo))
-        //    //{
-        //    //    tailorGateway.DeleteOrderMaterial(orderMaterial.OrderNo);
-        //    //    return tailorGateway.SaveOrderMaterial(orderMaterial);     
-        //    //}
-        //    //else
-        //    //{
-        //        return tailorGateway.SaveOrderMaterial(orderMaterial);
-        //    //}
-        //    //return tailorGateway.SaveOrderMaterial(orderMaterial);            
-            
-        //}
+        
         public string SaveOrderMaterial(List<OrderMaterial> orderMaterialList)
         {
             return tailorGateway.SaveOrderMaterial(orderMaterialList);
@@ -335,20 +336,6 @@ namespace Tailor1WebApp.BLL
             return tailorGateway.UpdateDressType(aDressType, DressTypeID);
         }
         #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

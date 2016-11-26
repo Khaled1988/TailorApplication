@@ -161,7 +161,7 @@
                 <div class="col-md-10">
                     <%--<asp:TextBox runat="server" ID="txtDelivereyDate" CssClass="form-control col-md-3 datepicker" data-provide="datepicker" />--%>
                     <asp:TextBox runat="server" ID="txtDelivereyDate" CssClass="form-control"></asp:TextBox>
-                    <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="txtDelivereyDate" Format="dd-MM-yyyy" />
+                    <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="txtDelivereyDate" Format="yyyy-MM-dd" />
                 </div>
             </div>
             <div class="form-group">

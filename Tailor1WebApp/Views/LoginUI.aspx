@@ -21,7 +21,8 @@
                             <p class="text-danger">
                                 <asp:Literal runat="server" ID="FailureText" />
                             </p>
-                        </asp:PlaceHolder>                        
+                        </asp:PlaceHolder>   
+                        <br /><br />                     
                         <div class="form-group">                            
                             <%--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <asp:Image id="Image1" runat="server" AlternateText="Image text" ImageAlign="Middle" class="img-responsive" CssClass="col-lg-offset-2 .col-xs-6 .col-sm-4" ImageUrl="~/Image/logo.jpg"/>

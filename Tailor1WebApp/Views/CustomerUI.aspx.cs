@@ -23,7 +23,7 @@ namespace Tailor1WebApp.Views
                     lblUserName.Text = "Welcome " + Session["UserName"].ToString();
                 }
                 btnCancil.Visible = false;
-                int customerID = Convert.ToInt32(Request["value1"]);
+                int customerID = Convert.ToInt32(Request["customerid"]);
                 if (customerID > 0)
                 {
                     lblCustomerHiddenID.Text = customerID.ToString();

@@ -55,11 +55,11 @@
                             <ul class="dropdown-menu">
                                 <li><a href="DressTypeUI.aspx">DressType Entry</a></li>
                                 <%--<li><a href="SupplierUI.aspx">Supplier Entry</a></li>--%>
-                                <li><a href="SupplierSearch.aspx">Supplier Search</a></li>
-                                <li><a href="CustomerSearch.aspx">Customer Search</a></li>
+                                <li><a href="SupplierSearch.aspx">Supplier Search</a></li>                                
                             </ul>                        
                             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="~/Views/">Tailor Operations<span class="caret"></span></a>
                             <ul class="dropdown-menu">                                
+                                <li><a href="CustomerSearch.aspx">Customer Search</a></li>
                                 <li><a href="MeasurementSearch.aspx">Measurement Search</a></li>
                                 <li><a href="OrderUI.aspx">Create Order</a></li>
                                 <li><a href="OrderMaterialCollection.aspx">Accessories Requisition</a></li>

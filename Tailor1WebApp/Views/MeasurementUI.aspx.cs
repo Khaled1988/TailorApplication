@@ -32,7 +32,7 @@ namespace Tailor1WebApp.Views
                     ddlCustomer.Items.FindByText(CID).Selected = true;
                 }
 
-                int measurementID = Convert.ToInt32(Request["value1"]);
+                int measurementID = Convert.ToInt32(Request["value1"]);                
 
                 if (measurementID > 0)
                 {
@@ -79,7 +79,7 @@ namespace Tailor1WebApp.Views
                     btnSave.Text = "Update";
                     btnCancil.Visible = true;
                     hlMeasurementSearch.Visible = false;
-                }
+                }                          
             }
         }
 
