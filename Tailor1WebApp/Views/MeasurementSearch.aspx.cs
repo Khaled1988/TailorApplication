@@ -113,7 +113,7 @@ namespace Tailor1WebApp.Views
                 ListViewDataItem currentItem = (ListViewDataItem)e.Item;
                 CustomerMeasurement customerMeasurement = (CustomerMeasurement)((ListViewDataItem)(e.Item)).DataItem;
                 //LinkButton lnkbtnCustomerName = (LinkButton)currentItem.FindControl("lnkbtnCustomerName");
-                Label lblName = (Label)currentItem.FindControl("lblName");
+                Label lblCustomerName = (Label)currentItem.FindControl("lblCustomerName");
                 Label lblDressType = (Label)currentItem.FindControl("lblDressType");
                 Label lblLength = (Label)currentItem.FindControl("lblLength");
                 Label lblChest = (Label)currentItem.FindControl("lblChest");
@@ -136,7 +136,7 @@ namespace Tailor1WebApp.Views
                 //lblSerialNo.Text = lvRowCount.ToString();
 
                 //lnkbtnCustomerName.Text = customerMeasurement.CustomerName;
-                lblName.Text = customerMeasurement.CustomerName;
+                lblCustomerName.Text = customerMeasurement.CustomerName;
                 lblDressType.Text = customerMeasurement.DressTypeName;
                 lblLength.Text = customerMeasurement.Length.ToString();
                 lblChest.Text = customerMeasurement.Chest.ToString();
@@ -182,6 +182,12 @@ namespace Tailor1WebApp.Views
         {
             (lvAllMeasurementList.FindControl("DataPager1") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
             LoadMeasurementList();
+        }
+
+        protected void btnAddMeasurement_Click(object sender, EventArgs e)
+        {
+            int customerID = Convert.ToInt32(lblCustomerID.Text);
+            Response.Redirect("~/Views/MeasurementUI.aspx?customerid=" + customerID);
         }
     }
 }

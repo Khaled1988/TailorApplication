@@ -394,6 +394,7 @@ namespace Tailor1WebApp.Models
                     aCustomerMeasurement.AllRoundRise = (double)aReader[11];
                     aCustomerMeasurement.Thaigh = (double)aReader[12];
                     aCustomerMeasurement.BottomOpening = (double)aReader[13];
+                    //aCustomerMeasurement.MeasurementDate = Convert.ToDateTime(aReader[14]);
                     aCustomerMeasurement.DressTypeName = aReader[14].ToString();
                     aCustomerMeasurement.CustomerName = aReader[15].ToString();
                     aCustomerMeasurement.CustomerIDCard = aReader[16].ToString();
@@ -468,6 +469,7 @@ namespace Tailor1WebApp.Models
                     aCustomerMeasurement.AllRoundRise = (double)aReader[11];
                     aCustomerMeasurement.Thaigh = (double)aReader[12];
                     aCustomerMeasurement.BottomOpening = (double)aReader[13];
+                    //aCustomerMeasurement.MeasurementDate = Convert.ToDateTime(aReader[14]);
                     aCustomerMeasurement.DressTypeName = aReader[14].ToString();
                     aCustomerMeasurement.CustomerName = aReader[15].ToString();
                     aCustomerMeasurement.CustomerIDCard = aReader[16].ToString();

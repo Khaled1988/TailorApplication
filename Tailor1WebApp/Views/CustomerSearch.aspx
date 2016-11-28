@@ -9,8 +9,8 @@
             <div style="text-align: right">
                 <asp:Label ID="lblUserName" runat="server" Visible="false"></asp:Label>
             </div>
-            
-            <asp:HyperLink runat="server" Text="Add New Customer" NavigateUrl="~/Views/CustomerUI.aspx" Font-Underline="true"></asp:HyperLink>
+            <asp:Button runat="server" ID="btnCustomerAdd" Text="+ Add New Customer" CssClass="btn btn-success" OnClick="btnCustomerAdd_Click" />
+            <%--<asp:HyperLink runat="server" Text="Add New Customer" NavigateUrl="~/Views/CustomerUI.aspx" Font-Underline="true"></asp:HyperLink>--%>
             <br /><br />
             <%--<asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
             <p class="text-danger">

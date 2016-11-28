@@ -140,7 +140,7 @@ namespace Tailor1WebApp.Views
                 lblQuantity.Text = supplierProduct.MaterialQuantity.ToString();
                 lblUnit.Text = supplierProduct.MaterialUnit;
                 lblMaterialCode.Text = supplierProduct.MaterialCode;
-                lblPurchaseDate.Text = supplierProduct.PurchaseDate.ToString("dd-MM-YYYY");
+                lblPurchaseDate.Text = supplierProduct.PurchaseDate.ToString("dd-MM-yyyy");
                 lblOtherInfo.Text = supplierProduct.OtherInformation;
                 lblMaterialID.Text = supplierProduct.MaterialID.ToString();
 
@@ -165,6 +165,11 @@ namespace Tailor1WebApp.Views
         {
             (lvAllSupplierList.FindControl("DataPager1") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
             LoadSupplierProductList();
+        }
+
+        protected void btnAddSupplier_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("SupplierUI.aspx");
         }
     }
 }

@@ -99,7 +99,7 @@
                 <asp:Label runat="server" CssClass="col-md-2 control-label">Purchase Date</asp:Label>
                 <div class="col-md-10">
                     <%--<asp:TextBox runat="server" ID="txtPurchaseDate" CssClass="form-control col-md-2 datepicker" data-provide="datepicker" />--%>
-                    <asp:TextBox runat="server" ID="txtPurchaseDate" CssClass="form-control" placeholder="Enter Accessories/Material Purchase Date"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtPurchaseDate" CssClass="form-control" placeholder="Enter Material Purchase Date"></asp:TextBox>
                     <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtPurchaseDate" Format="yyyy-MM-dd" />
                 </div>
             </div>

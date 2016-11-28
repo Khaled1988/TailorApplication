@@ -133,6 +133,7 @@ namespace Tailor1WebApp.Views
                             strbuilder.Append("')};");
                             strbuilder.Append("</script>");
                             ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", strbuilder.ToString());
+                            
                         }
 
                     }
@@ -199,6 +200,7 @@ namespace Tailor1WebApp.Views
             lblMessage.Text = string.Empty;
             txtPurchaseDate.Text = string.Empty;
             ddlMeasurementUnit.SelectedValue = "sl1";
+            btnSupplierSave.Enabled = false;
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)

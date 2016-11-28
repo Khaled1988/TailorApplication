@@ -20,6 +20,7 @@ namespace Tailor1WebApp.Views
                 LoadCustomerDropDown();
                 LoadDressTypeDropDown();
                 btnCancil.Visible = false;
+                //txtMeasurementDate.Text = System.DateTime.Now.ToString("yyyy-MM-dd");
                 if ((Session["UserName"] != null))
                 {
                     lblUserName.Visible = true;
@@ -32,13 +33,13 @@ namespace Tailor1WebApp.Views
                     ddlCustomer.Items.FindByText(CID).Selected = true;
                 }
 
-                int measurementID = Convert.ToInt32(Request["value1"]);                
-
+                int measurementID = Convert.ToInt32(Request["value1"]);
+                int customerIDmeasurement = Convert.ToInt32(Request["customerid"]);
+                List<Measurement> listofMeasurements = new List<Measurement>();
+                List<Customer> customerList = new List<Customer>();
                 if (measurementID > 0)
                 {
                     lblMeasurementHiddenID.Text = measurementID.ToString();
-                    List<Measurement> listofMeasurements = new List<Measurement>();
-                    List<Customer> customerList = new List<Customer>();
                     listofMeasurements = tailorBLL.GetAllMeasurementBymeasurementID(measurementID);
                     foreach (var item in listofMeasurements)
                     {
@@ -79,10 +80,20 @@ namespace Tailor1WebApp.Views
                     btnSave.Text = "Update";
                     btnCancil.Visible = true;
                     hlMeasurementSearch.Visible = false;
-                }                          
+                }
+                else if (customerIDmeasurement > 0)
+                {
+                    customerList = tailorBLL.GetAllCustomerByCustomerID(customerIDmeasurement);
+                    foreach (var customer in customerList)
+                    {
+                        lblCustomerName.Text = customer.Name.ToString();
+                        lblDesignation.Text = customer.Designation.ToString();
+                        lblWorkStation.Text = customer.WorkStation.ToString();
+                        ddlCustomer.SelectedItem.Text = customer.CustomerIDNo.ToString();
+                    }
+                }
             }
         }
-
         public void LoadCustomerDropDown()
         {
             List<Customer> listofCustomers = new List<Customer>();
@@ -92,7 +103,6 @@ namespace Tailor1WebApp.Views
             ddlCustomer.DataValueField = "CustomerID";
             ddlCustomer.DataBind();
         }
-
         public void LoadDressTypeDropDown()
         {
             List<DressType> listofDressTypes = new List<DressType>();
@@ -102,7 +112,6 @@ namespace Tailor1WebApp.Views
             ddlDressType.DataValueField = "DressTypeID";
             ddlDressType.DataBind();
         }
-
         protected void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -110,7 +119,7 @@ namespace Tailor1WebApp.Views
                 Measurement aMeasurement = new Measurement();
                 aMeasurement.CustomerID = Convert.ToInt32(ddlCustomer.SelectedValue);
                 aMeasurement.DressTypeID = Convert.ToInt32(ddlDressType.SelectedValue);
-
+                //aMeasurement.MeasurementDate = txtMeasurementDate.Text != "" ? Convert.ToDateTime(txtMeasurementDate.Text) : System.DateTime.MinValue;
                 if (txtLength.Text == "")
                 {
                     aMeasurement.Length = 0.0;
@@ -233,7 +242,6 @@ namespace Tailor1WebApp.Views
                 btnSave.Focus();
             }
         }
-
         private void ClearAllField()
         {
             ddlCustomer.SelectedIndex = 0;
@@ -251,7 +259,6 @@ namespace Tailor1WebApp.Views
             txtThaigh.Text = string.Empty;
             txtBottomOpening.Text = string.Empty;
         }
-
         protected void ddlCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
             int CustomerID = Convert.ToInt32(ddlCustomer.SelectedValue);
@@ -273,7 +280,6 @@ namespace Tailor1WebApp.Views
             //    lblCustomerName.Text = CustomerName.ToString();
             //}
         }
-
         protected void btnCancil_Click(object sender, EventArgs e)
         {
             Response.Redirect("MeasurementSearch.aspx");

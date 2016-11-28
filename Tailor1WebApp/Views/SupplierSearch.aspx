@@ -10,7 +10,8 @@
                 <asp:Label ID="lblUserName" runat="server" Visible="false"></asp:Label>
             </div>
 
-            <asp:HyperLink runat="server" Text="Add New Supplier" NavigateUrl="~/Views/SupplierUI.aspx" Font-Underline="true"></asp:HyperLink>
+            <%--<asp:HyperLink runat="server" Text="Add New Supplier" NavigateUrl="~/Views/SupplierUI.aspx" Font-Underline="true"></asp:HyperLink>--%>
+            <asp:Button runat="server" ID="btnAddSupplier" Text=" + Add New Supplier" CssClass="btn btn-success" OnClick="btnAddSupplier_Click" />
             <br />
             <br />
 

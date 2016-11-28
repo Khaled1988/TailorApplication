@@ -161,5 +161,10 @@ namespace Tailor1WebApp.Views
             (lvAllBrandList.FindControl("DataPager1") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
             LoadCustomerList();
         }
+
+        protected void btnCustomerAdd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CustomerUI.aspx");
+        }
     }
 }

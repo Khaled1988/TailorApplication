@@ -8,12 +8,10 @@
             <%--<h4>Measurement View</h4>--%>
             <div style="text-align: right">
                 <asp:Label ID="lblUserName" runat="server" Visible="false"></asp:Label>
-            </div>
-            
-            <asp:HyperLink runat="server" Text="New Measurement Entry" NavigateUrl="~/Views/MeasurementUI.aspx" Font-Underline="true"></asp:HyperLink>
+            </div>            
+            <%--<asp:HyperLink runat="server" Text="New Measurement Entry" NavigateUrl="~/Views/MeasurementUI.aspx" Font-Underline="true"></asp:HyperLink>--%>
             <br />
             <br />
-
             <%--<asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
                 <p class="text-danger">
                     <asp:Literal runat="server" ID="FailureText" />
@@ -44,26 +42,28 @@
                     <asp:TextBox runat="server" ID="txtCustomerName" CssClass="form-control" Width="200px" placeholder="Enter Customer Name" />
                     <asp:TextBox runat="server" ID="txtMobile" CssClass="form-control" Width="200px" placeholder="Enter Customer Mobile No." />
                     <asp:Button runat="server" ID="btnSearch" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+                    &nbsp;&nbsp;
+                    <asp:Button runat="server" ID="btnAddMeasurement" Text="+ Add New Measurement" CssClass="btn btn-success" OnClick="btnAddMeasurement_Click"/>
                     <asp:Label ID="lblCustomerID" runat="server" Text="" Visible="false"></asp:Label>
                 </div>
             </div>
             <br /><br />
-            <%--</div>    
+            <%--</div>   CustomerMeasurementID    
     <div>--%>
-            <asp:ListView ID="lvAllMeasurementList" runat="server" DataKeyNames="CustomerMeasurementID" OnItemCommand="lvAllMeasurementList_ItemCommand"
+            <asp:ListView ID="lvAllMeasurementList" runat="server" DataKeyNames="MeasurementID" OnItemCommand="lvAllMeasurementList_ItemCommand"
                 OnItemDataBound="lvAllMeasurementList_ItemDataBound" OnPagePropertiesChanging="OnPagePropertyChanging">
                 <LayoutTemplate>
                     <table class="table table-bordered table-responsive">
                         <tr id="trHead" runat="server">
                             <th id="th3" runat="server" align="center" width="5%">SL #
                             </th>
-                            <th id="th1" runat="server" text-align="center">Customer
+                            <th id="th1" runat="server" text-align="center">Customer Name
                             </th>
-                            <th id="th16" runat="server" text-align="center">Customer ID
+                            <th id="th16" runat="server" text-align="center">ID
                             </th>
                             <th id="th17" runat="server" text-align="center">Mobile No.
                             </th>
-                            <th id="th2" runat="server" align="center">Dress
+                            <th id="th2" runat="server" align="center">Dress Type
                             </th>
                             <th id="th4" runat="server" align="center">Length
                             </th>
@@ -112,9 +112,8 @@
                         <td align="center">
                             <asp:Label ID="lblSerialNo" runat="server" Text="<%# Container.DataItemIndex + 1 %>"></asp:Label>
                         </td>
-                        <td align="left">
-                            <%--<asp:LinkButton ID="lnkbtnCustomerName" runat="server" CausesValidation="false"></asp:LinkButton>--%>
-                            <asp:Label ID="lblName" runat="server" ForeColor="Black"></asp:Label>
+                        <td align="left">                            
+                            <asp:Label ID="lblCustomerName" runat="server" ForeColor="Black"></asp:Label>
                         </td>
                         <td align="left">
                             <asp:Label ID="lblCustomerID" runat="server" ForeColor="Black"></asp:Label>
@@ -171,9 +170,8 @@
                         <td align="center">
                             <asp:Label ID="lblSerialNo" runat="server" Text="<%# Container.DataItemIndex + 1 %>"></asp:Label>
                         </td>
-                        <td align="left">
-                            <%--<asp:LinkButton ID="lnkbtnCustomerName" runat="server" CausesValidation="false"></asp:LinkButton>--%>
-                            <asp:Label ID="lblName" runat="server" ForeColor="Black"></asp:Label>
+                        <td align="left">                            
+                            <asp:Label ID="lblCustomerName" runat="server" ForeColor="Black"></asp:Label>
                         </td>
                         <td align="left">
                             <asp:Label ID="lblCustomerID" runat="server" ForeColor="Black"></asp:Label>

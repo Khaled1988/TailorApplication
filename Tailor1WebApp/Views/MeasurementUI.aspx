@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="USBF Tailor" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MeasurementUI.aspx.cs" Inherits="Tailor1WebApp.Views.MeasurementUI" %>
-
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="ajaxtoolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="form-horizontal">
         <br />
@@ -42,10 +42,17 @@
                     <asp:Label runat="server" ID="lblWorkStation" CssClass="form-control" Enabled="false" Width="400px" />
                 </div>
             </div>
+            <%--<div class="form-group">
+                <asp:Label runat="server" CssClass="col-md-2 control-label">Date</asp:Label>
+                <div class="col-md-10">
+                    <asp:TextBox runat="server" ID="txtMeasurementDate" CssClass="form-control"></asp:TextBox>
+                    <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="txtMeasurementDate" Format="yyyy-MM-dd" />
+                </div>
+            </div>--%>
             <div class="form-group">
                 <asp:Label runat="server" CssClass="col-md-2 control-label">Dress Type</asp:Label>
                 <div class="col-md-10">
-                    <asp:DropDownList ID="ddlDressType" runat="server" CssClass="form-control" Width="400px" AppendDataBoundItems="true">
+                    <asp:DropDownList ID="ddlDressType" runat="server" CssClass="form-control" Width="280px" AppendDataBoundItems="true">
                         <asp:ListItem Text="-Select Dress-" Value="0" />
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="ddlDressType" InitialValue="0" runat="server" ErrorMessage="Please select Dress type" CssClass="text-danger"></asp:RequiredFieldValidator>

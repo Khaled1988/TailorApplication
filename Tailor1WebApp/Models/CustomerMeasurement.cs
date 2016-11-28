@@ -26,5 +26,6 @@ namespace Tailor1WebApp.Models
         public double AllRoundRise { get; set; }
         public double Thaigh { get; set; }
         public double BottomOpening { get; set; }
+        //public DateTime MeasurementDate { get; set; }
     }
 }
